@@ -24,13 +24,13 @@ currency-exchanger-react/
     ├── logo.svg
     ├── reportWebVitals.js
     └── setupTests.js
-    components/
-    ├── NavBar.js
-    ├── Home.js
-    ├── Details.js
-    ├── CurrencyCardGrid.png
-    ├── ConverterPanel.json
-    └── CurrencyCard.js
+         components/
+                ├── NavBar.js
+                ├── Home.js
+                ├── Details.js
+                ├── CurrencyCardGrid.png
+                ├── ConverterPanel.json
+                └── CurrencyCard.js
 
 
 ## Available Scripts
