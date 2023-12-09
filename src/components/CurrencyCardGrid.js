@@ -10,7 +10,7 @@ const CurrencyCardGrid = ({ amount ,rates, popularCurrencies }) => {
             <div className="card-body">
               <h5 className="card-title">{currency}</h5>
               <p className="card-text">
-                Converted Value:  {amount ? rates[currency] * amount : ''}
+                Converted Value:  {(amount && rates) ? rates[currency] * amount : ''}
               </p>
             </div>
           </div>
