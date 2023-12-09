@@ -1,40 +1,53 @@
 // ConverterPanel.js
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate  , useParams} from 'react-router-dom';
 
-const ConverterPanel = ({ fromTo }) => {
+const ConverterPanel = ({  onHandleRatesSubmit , onAmountSubmit}) => {
+  
   const [amount, setAmount] = useState('');
-  const [fromCurrency, setFromCurrency] = useState('EUR');
+  const [fromCurrency, setFromCurrency] =  useState('EUR');
   const [toCurrency, setToCurrency] = useState('USD');
   const [convertedResult, setConvertedResult] = useState(null);
   const [currencies, setCurrencies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { fromTo } = useParams();
   const history = useNavigate();
 
   useEffect(() => {
-    // Fetch available currencies from the Fixer API
-    const fetchCurrencies = async () => {
-      try {
-        const response = await fetch('http://data.fixer.io/api/symbols?access_key=795686011cad62f5a089f258a60be981');
-        const data = await response.json();
-        const availableCurrencies = Object.keys(data.symbols);
-        setCurrencies(availableCurrencies);
-      } catch (error) {
-        console.error('Error fetching available currencies:', error);
-      }
-    };
 
+    const fetchCurrencies = async () => {
+        try {
+          const response = await fetch(`http://data.fixer.io/api/symbols?access_key=${process.env.REACT_APP_API_KEY}`);
+          const data = await response.json();
+          const availableCurrencies = Object.keys(data.symbols);
+          setCurrencies(availableCurrencies);
+        } catch (error) {
+          console.error('Error fetching available currencies:', error);
+        }
+      };
+      
     fetchCurrencies();
   }, []);
+  useEffect(() => {
+    // Check if fromTo parameter is present in the URL
+    if (fromTo) {
+      // Extract fromCurrency and toCurrency from route parameter
+      const [from, to] = fromTo.split('-');
+      setFromCurrency(from);
+      setToCurrency(to);
+    }
+  }, [fromTo]);
 
   const fetchExchangeRates = async () => {
-    try {
+    onAmountSubmit(amount)
+    try { 
         setLoading(true);
       const response = await fetch(
         `https://open.er-api.com/v6/latest/${fromCurrency}`
       );
       const data = await response.json();
       const rate = data.rates[toCurrency];
+      onHandleRatesSubmit(data.rates);
       setConvertedResult((amount * rate).toFixed(2));
     } catch (error) {
       console.error('Error fetching exchange rates:', error);
@@ -72,7 +85,7 @@ const ConverterPanel = ({ fromTo }) => {
   };
 
   return (
-    <div className="sticky-top mt-4 mb-4">
+    <div className="sticky-top mt-4 mb-4 shadow-sm p-4 bg-white">
       <div className="form-group">
         <label htmlFor="amountInput">Amount:</label>
         <input

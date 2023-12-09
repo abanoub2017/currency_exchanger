@@ -1,21 +1,22 @@
-// Details.js
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ConverterPanel from './ConverterPanel';
 import Chart from './Chart';
 
 const Details = () => {
-  const { fromTo } = useParams();
+  const [amount, setAmount] = useState('');
+
+  const handleAmountSubmit = (submittedAmount) => {
+    setAmount(submittedAmount);
+  };
 
   return (
     <div>
       <div className="mt-4 mb-2">
-        {/* Display the full name of the "From" currency */}
-        {/* You can add your logo or any other content here */}
-      </div>
+=      </div>
       <Link to="/">Back to Home</Link>
-      <ConverterPanel fromTo={fromTo} />
-      <Chart fromTo={fromTo} />
+      <ConverterPanel amount={amount} setAmount={setAmount} onAmountSubmit={handleAmountSubmit} />
+      <Chart />
     </div>
   );
 };
