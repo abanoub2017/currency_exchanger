@@ -1,6 +1,37 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Structure
+
+```plaintext
+currency-exchanger-react/
+├── README.md
+├── node_modules/
+├── package.json
+├── public/
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+└── src/
+    ├── App.css
+    ├── App.js
+    ├── App.test.js
+    ├── index.css
+    ├── index.js
+    ├── logo.svg
+    ├── reportWebVitals.js
+    └── setupTests.js
+         components/
+                ├── NavBar.js
+                ├── Home.js
+                ├── Details.js
+                ├── CurrencyCardGrid.png
+                ├── ConverterPanel.json
+                └── CurrencyCard.js
+
 
 ## Available Scripts
 

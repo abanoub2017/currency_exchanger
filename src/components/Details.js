@@ -1,21 +1,60 @@
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import ConverterPanel from './ConverterPanel';
+// import Chart from './Chart';
+
+// const Details = () => {
+//   const [amount, setAmount] = useState('');
+
+//   const handleAmountSubmit = (submittedAmount) => {
+//     setAmount(submittedAmount);
+//   };
+
+//   return (
+//     <div>
+//       <div className="mt-4 mb-2">
+// =      </div>
+//       <Link to="/">Back to Home</Link>
+//       <ConverterPanel amount={amount} setAmount={setAmount} onAmountSubmit={handleAmountSubmit} />
+//       <Chart />
+//     </div>
+//   );
+// };
+
+// export default Details;
+
 // Details.js
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ConverterPanel from './ConverterPanel';
-import Chart from './Chart';
+// import ChartComponent from './Chart';
 
 const Details = () => {
-  const { fromTo } = useParams();
+  const [amount, setAmount] = useState('');
+  const [historicalData, setHistoricalData] = useState([]);
+  
+  const handleRatesSubmit = (ratesSubmit) => {
+    // Assuming ratesSubmit contains historical data for the selected currencies
+    setHistoricalData(ratesSubmit);
+  };
+
+  const handleAmountSubmit = (submittedAmount) => {
+    setAmount(submittedAmount);
+  };
 
   return (
     <div>
       <div className="mt-4 mb-2">
-        {/* Display the full name of the "From" currency */}
-        {/* You can add your logo or any other content here */}
+        {/* Additional content if needed */}
       </div>
       <Link to="/">Back to Home</Link>
-      <ConverterPanel fromTo={fromTo} />
-      <Chart fromTo={fromTo} />
+      <ConverterPanel
+        amount={amount}
+        setAmount={setAmount}
+        onHandleRatesSubmit={handleRatesSubmit}
+        onAmountSubmit={handleAmountSubmit}
+      />
+      {/* <ChartComponent historicalData={historicalData} /> */}
     </div>
   );
 };

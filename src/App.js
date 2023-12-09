@@ -8,8 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const App = () => {
   return (
     <BrowserRouter>
-     <div className="container">
      <NavBar />
+     <div className="container mt-5 pt-4 ">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/details/:fromTo" element={<Details />} />
